@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Praktijk Boven Jan — Relatiecoaching en persoonlijke coaching</title>
+<meta name="description" content="Jan Roelofsen, coach en EFT-counselor bij Praktijk Boven Jan. Relatiecoaching en persoonlijke coaching voor wie vastloopt — met zichzelf of met elkaar. Gratis kennismakingsgesprek.">
+<meta name="author" content="Jan Roelofsen">
+<meta name="theme-color" content="#1B3560">
+
+<!-- Domein: praktijk-bovenjan.nl -->
+<link rel="canonical" href="https://praktijk-bovenjan.nl/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:site_name" content="Praktijk Boven Jan">
+<meta property="og:title" content="Praktijk Boven Jan — Relatiecoaching en persoonlijke coaching">
+<meta property="og:description" content="Jan Roelofsen, coach en EFT-counselor. Voor wie vastloopt — met zichzelf of met elkaar.">
+<meta property="og:url" content="https://praktijk-bovenjan.nl/">
+<meta property="og:image" content="https://praktijk-bovenjan.nl/foto-jan.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231B3560'/%3E%3Crect x='10' y='15' width='12' height='2' fill='%23D8B78E'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; transition: opacity .2s ease, background-color .25s ease, color .25s ease; }
+  a:hover { opacity: 0.75; }
+
+  html { scroll-behavior: smooth; }
+  section[id] { scroll-margin-top: 28px; }
+
+  /* Menu: een tan streepje dat vanuit het midden uitloopt, in plaats van vervagen */
+  header > nav a { position: relative; padding-bottom: 3px; }
+  header > nav a:hover { opacity: 1; }
+  header > nav a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 1px; background: #B08A5C;
+    transform: scaleX(0); transform-origin: center;
+    transition: transform .3s cubic-bezier(.2,.7,.3,1);
+  }
+  header > nav a:hover::after,
+  header > nav a:focus-visible::after { transform: scaleX(1); }
+
+  /* Primaire knoppen verdiepen bij hover in plaats van te vervagen */
+  .knop-primair:hover { opacity: 1; background-color: #16294A !important; }
+  .knop-outline:hover { opacity: 1; background-color: rgba(27,53,96,0.06); }
+
+  /* Rustige introductie van blokken bij het scrollen.
+     De klasse wordt door JS gezet, zodat alles zichtbaar blijft zonder JS. */
+  .instap { opacity: 0; transform: translateY(16px); }
+  .instap-actief {
+    opacity: 1; transform: none;
+    transition: opacity .65s cubic-bezier(.2,.7,.3,1), transform .65s cubic-bezier(.2,.7,.3,1);
+  }
+
+  /* --- Openingsbeeld: het eerste scherm komt rustig op, van boven naar beneden.
+         .js-intro wordt in de <head> gezet, nog vóór de eerste paint, zodat er
+         geen flits is. Zonder JS of met "beperk beweging" gebeurt hier niets
+         en staat alles er gewoon meteen. --- */
+  .js-intro .intro { opacity: 0; transform: translateY(14px); }
+  .js-intro .intro-beeld { transform: none; }        /* de foto vervaagt alleen, schuift niet */
+
+  .js-intro-klaar .intro {
+    opacity: 1; transform: none;
+    transition: opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1);
+  }
+  .js-intro-klaar .intro-beeld { transition-duration: 1.15s; }
+
+  .js-intro-klaar .intro-1 { transition-delay: 0ms; }
+  .js-intro-klaar .intro-2 { transition-delay: 120ms; }
+  .js-intro-klaar .intro-3 { transition-delay: 240ms; }
+  .js-intro-klaar .intro-4 { transition-delay: 330ms; }
+  .js-intro-klaar .intro-5 { transition-delay: 420ms; }
+
+  /* Formuliervelden staan op navy — placeholders moeten leesbaar blijven */
+  ::placeholder { color: #F1E1D2; opacity: 0.55; }
+  input, textarea, button { font-family: inherit; }
+  button { cursor: pointer; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid #D8B78E;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .visueel-verborgen {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  #form-status { font-size:16px; line-height: 1.6; color: #D8B78E; }
+  #form-status:empty { display: none; }
+
+  /* --- Mobiel: de header past niet vloeiend, dus hier één bewuste breakpoint.
+         Rij 1 = logo + knop, rij 2 = menu over de volle breedte. --- */
+  @media (max-width: 620px) {
+    header { padding: 17px 6vw !important; gap: 12px !important; }
+
+    header > nav {
+      order: 3;
+      flex: 1 1 100%;
+      gap: 8px 14px !important;
+      font-size:16px !important;
+      letter-spacing: 0 !important;
+      justify-content: center !important;
+    }
+    /* 5 links passen niet op één regel; met een vaste basis van 28% worden het
+       twee gecentreerde rijen (3 + 2), in plaats van 4 met een losse "Contact" */
+    header > nav a { flex: 0 1 28%; text-align: center; }
+
+    /* logo iets compacter zodat het naast de knop past */
+    header > a:first-child > div:first-child { width: 44px !important; height: 44px !important; }
+    header > a:first-child > div:last-child > div:first-child { font-size:19px !important; letter-spacing: 1.8px !important; }
+    header > a:first-child > div:last-child > div:last-child { font-size:12px !important; letter-spacing: 2.4px !important; }
+
+    header > a:last-child { padding: 9px 15px !important; font-size:14px !important; letter-spacing: 0.2px !important; }
+  }
+
+  /* Onder ~360px past het woordmerk niet meer naast de knop. Dan mag de knop
+     de volle breedte pakken, zodat het een bewuste regel wordt in plaats van
+     een losgeslagen knopje. */
+  @media (max-width: 359px) {
+    header > a:last-child { flex: 1 1 100%; text-align: center; }
+  }
+
+  /* Knoppen groeien alleen op smalle schermen; op desktop hun natuurlijke maat,
+     zoals in het ontwerp. */
+  @media (min-width: 621px) {
+    .knop-primair[style*="flex"], .knop-outline[style*="flex"] { flex: 0 0 auto !important; }
+  }
+
+  @media print {
+    .instap, .intro { opacity: 1 !important; transform: none !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<script>
+  /* Moet vóór de eerste paint draaien, anders zie je de tekst even staan
+     voordat hij verdwijnt. Vangnet staat er direct onder: mocht het opstarten
+     hieronder ooit misgaan, dan is de pagina na 2 seconden hoe dan ook zichtbaar. */
+  (function () {
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var h = document.documentElement;
+      h.classList.add('js-intro');
+      setTimeout(function () { h.classList.add('js-intro-klaar'); }, 2000);
+    } catch (e) {}
+  })();
+</script>
+</head>
+
+<body>
+<div style="font-family: 'EB Garamond', Georgia, serif; background: #F7F1E8; color: #1B3560; width: 100%; overflow-x: hidden;">
+
+  <!-- HEADER -->
+  <header class="intro intro-1" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; padding: clamp(14px, 3vw, 22px) 6vw; background:#F1E1D2; position:relative; z-index:10;">
+    <a href="#top" style="display:flex; align-items:center; gap:12px;" aria-label="Praktijk Boven Jan — naar boven">
+      <div style="width:52px; height:52px; border-radius:50%; background:#1B3560; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        <div style="width:18px; height:2px; background:#D8B78E;"></div>
+      </div>
+      <div style="font-family:'Cormorant Garamond', serif; line-height:1.1;">
+        <div style="font-size:22px; letter-spacing:2.4px; font-weight:600;">PRAKTIJK</div>
+        <div style="font-size:13px; letter-spacing:3.4px; color:#1B3560; opacity:0.75;">BOVEN JAN</div>
+      </div>
+    </a>
+    <nav style="display:flex; gap:clamp(12px,2vw,32px); flex-wrap:wrap; font-size:16px; letter-spacing:0.5px; justify-content:center;" aria-label="Hoofdmenu">
+      <a href="#over">Over mij</a>
+      <a href="#werkwijze">Werkwijze</a>
+      <a href="#diensten">Diensten</a>
+      <a href="#tarieven">Tarieven</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="knop-primair" style="background:#1B3560; color:#F7F1E8; padding:11px 22px; border-radius:2px; font-size:15px; letter-spacing:0.5px; white-space:nowrap;">Contactformulier</a>
+  </header>
+
+  <main id="top">
+
+  <!-- HERO -->
+  <section style="display:flex; flex-wrap:wrap; align-items:stretch; background:#F1E1D2;">
+    <div style="display:flex; align-items:center; justify-content:center; padding: clamp(40px, 6vw, 84px); flex:1 1 320px; order:0;">
+      <img src="foto-jan.jpg" class="intro intro-beeld intro-2" width="750" height="1000" fetchpriority="high" decoding="async"
+           alt="Jan Roelofsen, coach en counselor bij Praktijk Boven Jan, staand tussen twee boomstammen"
+           style="width:100%; height:auto; max-width:clamp(340px, 30vw, 470px); aspect-ratio: 3/4; object-fit:cover; border-radius:6px; margin:0 auto;">
+    </div>
+    <div style="display:flex; flex-direction:column; justify-content:center; padding: clamp(40px, 6vw, 84px); gap:34px; min-width:0; flex:1.2 1 380px; order:1;">
+      <h1 class="intro intro-3" style="font-family:'Cormorant Garamond', serif; font-size:clamp(36px, 5vw, 64px); line-height:1.05; margin:0; color:#1B3560; font-weight:500;">Even<br>voorstellen&hellip;</h1>
+      <p class="intro intro-4" style="font-size:clamp(17px, 1.6vw, 21px); line-height:1.6; margin:0; max-width:480px; color:#1B3560;">Ik ben Jan Roelofsen, coach en counselor bij Praktijk Boven Jan. Na jarenlange ervaring als maatschappelijk werker ben ik sinds 5 jaar ook EFT-counselor en geef ik de Houd me Vast-training. Ik help mensen en stellen die vastlopen weer verbinding te vinden &mdash; met zichzelf, en met elkaar.</p>
+      <div class="intro intro-5" style="display:flex; gap:16px; flex-wrap:wrap; margin-top:8px;">
+        <a href="#contact" class="knop-primair" style="flex:1 1 210px; text-align:center; background:#1B3560; color:#F7F1E8; padding:14px 30px; font-size:17px; border-radius:2px;">Vul contactformulier in</a>
+        <a href="#over" class="knop-outline" style="flex:1 1 150px; text-align:center; border:1px solid #1B3560; color:#1B3560; padding:14px 30px; font-size:17px; border-radius:2px;">Meer over mij</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE BAND -->
+  <section style="background:#1B3560; padding: clamp(72px,11vw,124px) 6vw; text-align:center;">
+    <p style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:clamp(22px,4vw,32px); line-height:1.55; color:#F1E1D2; max-width:900px; margin:0 auto 20px auto;">
+      &ldquo;Ik wil dat jij bent.&rdquo;
+    </p>
+    <p style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:clamp(22px,4vw,32px); line-height:1.55; color:#F1E1D2; max-width:900px; margin:0 auto;">
+      &ldquo;Als mijn verlangen is dat jij jezelf kan zijn, en jouw verlangen is dat ik mijzelf kan zijn &mdash; dan hebben we werkelijk lief.&rdquo;
+    </p>
+  </section>
+
+  <!-- OVER MIJ -->
+  <section id="over" style="padding: clamp(76px,11vw,132px) 6vw; display:grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap:clamp(48px,7vw,64px); align-items:start; background:#F7F1E8;">
+    <div>
+      <div style="font-size:14px; letter-spacing:3px; color:#B08A5C; margin-bottom:14px;">OVER MIJ</div>
+      <h2 style="font-family:'Cormorant Garamond', serif; font-size:clamp(30px,4vw,42px); font-weight:500; margin:0 0 24px 0; color:#1B3560;">Een luisterend oor, een heldere blik</h2>
+      <p style="font-size:21px; line-height:1.8; color:#1B3560; margin:0 0 20px 0;">Ik geloof niet zo in advies.<br>Wel in goede vragen. In mijn ervaring weten mensen vaak veel beter dan ze denken wat er speelt &mdash; ze hebben alleen iemand nodig die de ruimte openhoudt terwijl ze het uitzoeken.</p>
+      <p style="font-size:21px; line-height:1.8; color:#1B3560; margin:0;">Ik werk niet met protocollen of stappenplannen. Wat ik wel doe: aandachtig luisteren, doorvragen waar het spannend wordt, en benoemen wat ik zie gebeuren tussen jullie of in jou. Soms is dat confronterend. Meestal is het vooral een opluchting.</p>
+    </div>
+    <div style="background:#1B3560; padding:clamp(34px,5.5vw,44px) clamp(30px,5vw,40px); border-radius:2px;">
+      <div style="font-family:'Cormorant Garamond', serif; font-size:30px; color:#D8B78E; font-weight:500; margin-bottom:18px;">Boven Jan zijn</div>
+      <div style="font-size:14px; letter-spacing:2px; color:#F1E1D2; opacity:0.8; margin-bottom:22px; padding-bottom:18px; border-bottom:1px solid rgba(241,225,210,0.3);">SPREEKWOORD</div>
+      <p style="font-size:19px; line-height:1.7; color:#F1E1D2; margin:0;">Betekenis: de moeilijkheden overwonnen hebben; genoeg verdiend hebben.</p>
+    </div>
+  </section>
+
+  <!-- WERKWIJZE -->
+  <section id="werkwijze" style="padding: clamp(72px,11vw,124px) 6vw; background:#F1E1D2;">
+    <div style="text-align:center; margin-bottom:clamp(40px,8vw,64px);">
+      <div style="font-size:14px; letter-spacing:3px; color:#B08A5C; margin-bottom:14px;">WERKWIJZE</div>
+      <h2 style="font-family:'Cormorant Garamond', serif; font-size:clamp(30px,4vw,42px); font-weight:500; margin:0; color:#1B3560;">Hoe het werkt</h2>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap:40px;">
+      <div>
+        <div style="font-family:'Cormorant Garamond', serif; font-size:40px; color:#B08A5C; margin-bottom:12px;" aria-hidden="true">1</div>
+        <h3 style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 1.9vw, 28px); font-weight:500; margin:0 0 12px 0; color:#1B3560;">Kennismaking</h3>
+        <p style="font-size:clamp(17px, 1.4vw, 21px); line-height:1.7; color:#1B3560; margin:0;">We bespreken vrijblijvend waar je tegenaan loopt en wat je zoekt in begeleiding.</p>
+      </div>
+      <div>
+        <div style="font-family:'Cormorant Garamond', serif; font-size:40px; color:#B08A5C; margin-bottom:12px;" aria-hidden="true">2</div>
+        <h3 style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 1.9vw, 28px); font-weight:500; margin:0 0 12px 0; color:#1B3560;">Traject op maat</h3>
+        <p style="font-size:clamp(17px, 1.4vw, 21px); line-height:1.7; color:#1B3560; margin:0;">Samen stellen we een aanpak vast, individueel of als koppel, gericht op jouw vraag.</p>
+      </div>
+      <div>
+        <div style="font-family:'Cormorant Garamond', serif; font-size:40px; color:#B08A5C; margin-bottom:12px;" aria-hidden="true">3</div>
+        <h3 style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 1.9vw, 28px); font-weight:500; margin:0 0 12px 0; color:#1B3560;">Verdieping en groei</h3>
+        <p style="font-size:clamp(17px, 1.4vw, 21px); line-height:1.7; color:#1B3560; margin:0;">In de sessies werken we stap voor stap aan meer verbinding, rust en begrip.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIENSTEN -->
+  <section id="diensten" style="padding: clamp(72px,11vw,124px) 6vw; background:#1B3560;">
+    <div style="text-align:center; margin-bottom:clamp(40px,8vw,64px);">
+      <div style="font-size:14px; letter-spacing:3px; color:#D8B78E; margin-bottom:14px;">DIENSTEN</div>
+      <h2 style="font-family:'Cormorant Garamond', serif; font-size:clamp(30px,4vw,42px); font-weight:500; margin:0; color:#F7F1E8;">Waarmee ik je kan helpen</h2>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap:32px;">
+      <div style="background:#16294A; border:1px solid rgba(216,183,142,0.25); border-radius:2px; padding:clamp(32px,5.5vw,44px);">
+        <h3 style="font-family:'Cormorant Garamond', serif; font-size:32px; font-weight:500; margin:0 0 18px 0; color:#F7F1E8;">Relatiecoaching</h3>
+        <p style="font-size:clamp(17px, 1.5vw, 22px); line-height:1.7; color:#F1E1D2; margin:0 0 26px 0;">Voor stellen die merken dat het gesprek is stilgevallen, of dat dezelfde ruzie steeds terugkomt in een ander jasje.</p>
+        <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;">
+          <li style="display:flex; gap:12px; font-size:clamp(17px, 1.3vw, 20px); line-height:1.5; color:#F1E1D2;"><span style="color:#D8B78E; flex-shrink:0;" aria-hidden="true">&ndash;</span>Als jullie langs elkaar heen praten</li>
+          <li style="display:flex; gap:12px; font-size:clamp(17px, 1.3vw, 20px); line-height:1.5; color:#F1E1D2;"><span style="color:#D8B78E; flex-shrink:0;" aria-hidden="true">&ndash;</span>Na een breuk in het vertrouwen</li>
+          <li style="display:flex; gap:12px; font-size:clamp(17px, 1.3vw, 20px); line-height:1.5; color:#F1E1D2;"><span style="color:#D8B78E; flex-shrink:0;" aria-hidden="true">&ndash;</span>Bij een nieuwe fase &mdash; samenwonen, kinderen, uit huis</li>
+          <li style="display:flex; gap:12px; font-size:clamp(17px, 1.3vw, 20px); line-height:1.5; color:#F1E1D2;"><span style="color:#D8B78E; flex-shrink:0;" aria-hidden="true">&ndash;</span>Als je wilt weten of je verder wilt, of niet</li>
+        </ul>
+      </div>
+      <div style="background:#16294A; border:1px solid rgba(216,183,142,0.25); border-radius:2px; padding:clamp(32px,5.5vw,44px);">
+        <h3 style="font-family:'Cormorant Garamond', serif; font-size:32px; font-weight:500; margin:0 0 18px 0; color:#F7F1E8;">Persoonlijke coaching</h3>
+        <p style="font-size:clamp(17px, 1.5vw, 22px); line-height:1.7; color:#F1E1D2; margin:0 0 26px 0;">Voor wie vastloopt in werk, richting of in zichzelf, en merkt dat harder duwen niet meer helpt.</p>
+        <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;">
+          <li style="display:flex; gap:12px; font-size:clamp(17px, 1.3vw, 20px); line-height:1.5; color:#F1E1D2;"><span style="color:#D8B78E; flex-shrink:0;" aria-hidden="true">&ndash;</span>Als je werk niet meer past maar je niet weet wat wel</li>
+          <li style="display:flex; gap:12px; font-size:clamp(17px, 1.3vw, 20px); line-height:1.5; color:#F1E1D2;"><span style="color:#D8B78E; flex-shrink:0;" aria-hidden="true">&ndash;</span>Bij twijfel over een grote keuze</li>
+          <li style="display:flex; gap:12px; font-size:clamp(17px, 1.3vw, 20px); line-height:1.5; color:#F1E1D2;"><span style="color:#D8B78E; flex-shrink:0;" aria-hidden="true">&ndash;</span>Als je steeds tegen hetzelfde patroon aanloopt</li>
+          <li style="display:flex; gap:12px; font-size:clamp(17px, 1.3vw, 20px); line-height:1.5; color:#F1E1D2;"><span style="color:#D8B78E; flex-shrink:0;" aria-hidden="true">&ndash;</span>Wanneer je wilt weten wat je eigenlijk zelf wilt</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HOUD ME VAST — losstaand blok, bewust makkelijk te verwijderen.
+       Wil Jan dit er (nog) niet in? Knip alles weg tussen deze comment en
+       "EINDE HOUD ME VAST" verderop. Er verandert verder niets aan de pagina:
+       er staat geen menu-link naar dit blok en niets anders verwijst ernaar.
+
+       LET OP — deze gegevens komen van onderonsveenendaal.nl en verlopen:
+       de startdatum en de prijzen moeten per groep bijgewerkt worden.
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section id="houdmevast" style="padding: clamp(72px,11vw,124px) 6vw; background:#F1E1D2;">
+    <div style="max-width:760px; margin:0 auto; text-align:center;">
+      <div data-reveal style="font-size:14px; letter-spacing:3px; color:#B08A5C; margin-bottom:14px;">OOK IN GROEPSVERBAND</div>
+      <h2 data-reveal style="font-family:'Cormorant Garamond', serif; font-size:clamp(30px,4vw,42px); font-weight:500; margin:0 0 8px 0; color:#1B3560;">Houd me Vast</h2>
+      <p data-reveal style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:clamp(19px,2.4vw,23px); line-height:1.4; color:#B08A5C; margin:0 0 28px 0;">d&eacute; APK voor je relatie</p>
+      <p data-reveal style="font-size:clamp(17px, 1.65vw, 22px); line-height:1.75; color:#1B3560; margin:0 auto; max-width:600px;">Naast de gesprekken in mijn eigen praktijk geef ik samen met Jannie de Houd me Vast-training: acht avonden met een aantal andere stellen, waarin je stap voor stap werkt aan meer verbinding. Een compacte versie van EFT-relatietherapie &mdash; bedoeld voor stellen bij wie het niet crisis is, maar die er samen wel meer uit willen halen.</p>
+    </div>
+
+    <div data-reveal style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(150px,100%), 1fr)); gap:clamp(22px,4vw,34px); max-width:900px; margin:clamp(38px,7vw,54px) auto 0 auto;">
+      <div style="border-top:1px solid #B08A5C; padding-top:18px;">
+        <div style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 2.1vw, 30px); color:#1B3560; margin-bottom:4px;">8 avonden</div>
+        <div style="font-size:clamp(15px, 1.2vw, 18px); line-height:1.5; color:#1B3560; opacity:0.7;">samen met andere stellen</div>
+      </div>
+      <div style="border-top:1px solid #B08A5C; padding-top:18px;">
+        <div style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 2.1vw, 30px); color:#1B3560; margin-bottom:4px;">&euro; 175</div>
+        <div style="font-size:clamp(15px, 1.2vw, 18px); line-height:1.5; color:#1B3560; opacity:0.7;">per stel &middot; &euro; 150 m&eacute;t boek</div>
+      </div>
+      <div style="border-top:1px solid #B08A5C; padding-top:18px;">
+        <div style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 2.1vw, 30px); color:#1B3560; margin-bottom:4px;">Veenendaal</div>
+        <div style="font-size:clamp(15px, 1.2vw, 18px); line-height:1.5; color:#1B3560; opacity:0.7;">Ontmoetingshuis Onder Ons</div>
+      </div>
+      <div style="border-top:1px solid #B08A5C; padding-top:18px;">
+        <div style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 2.1vw, 30px); color:#1B3560; margin-bottom:4px;">29 sept 2026</div>
+        <div style="font-size:clamp(15px, 1.2vw, 18px); line-height:1.5; color:#1B3560; opacity:0.7;">start volgende groep</div>
+      </div>
+    </div>
+
+    <p data-reveal style="max-width:600px; margin:clamp(30px,5vw,40px) auto 0 auto; text-align:center; font-size:clamp(17px, 1.35vw, 20px); line-height:1.75; color:#1B3560;">
+      De training wordt georganiseerd door Onder Ons en is dankzij subsidie van de gemeente Veenendaal laag geprijsd. Aanmelden gaat via hen, en begint altijd met een kennismakingsgesprek.<br>
+      <a href="https://onderonsveenendaal.nl/houd-me-vast-de-apk-voor-je-relatie/" target="_blank" rel="noopener" style="display:inline-block; margin-top:16px; color:#1B3560; text-decoration:underline; text-decoration-color:#B08A5C; text-decoration-thickness:1px; text-underline-offset:5px;">Meer informatie en aanmelden bij Onder&nbsp;Ons&nbsp;&rarr;</a>
+    </p>
+  </section>
+  <!-- ═══════════════════ EINDE HOUD ME VAST ═══════════════════ -->
+
+  <!-- TARIEVEN -->
+  <section id="tarieven" style="padding: clamp(72px,11vw,124px) 6vw; background:#F7F1E8;">
+    <div style="text-align:center; margin-bottom:20px;">
+      <div style="font-size:14px; letter-spacing:3px; color:#B08A5C; margin-bottom:14px;">TARIEVEN</div>
+      <h2 style="font-family:'Cormorant Garamond', serif; font-size:clamp(30px,4vw,42px); font-weight:500; margin:0; color:#1B3560;">Wat het kost</h2>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap:40px; max-width:1000px; margin:clamp(40px,8vw,64px) auto 0 auto;">
+      <div style="border-top:2px solid #1B3560; padding-top:26px;">
+        <h3 style="font-family:'Cormorant Garamond', serif; font-size:26px; font-weight:500; margin:0 0 10px 0; color:#1B3560;">Kennismakingsgesprek</h3>
+        <p style="font-size:clamp(16px, 1.2vw, 18px); line-height:1.6; color:#1B3560; margin:0 0 18px 0; opacity:0.75;">30 minuten &middot; telefonisch of op locatie</p>
+        <div style="font-family:'Cormorant Garamond', serif; font-size:28px; color:#B08A5C;">gratis</div>
+      </div>
+      <div style="border-top:2px solid #1B3560; padding-top:26px;">
+        <h3 style="font-family:'Cormorant Garamond', serif; font-size:26px; font-weight:500; margin:0 0 10px 0; color:#1B3560;">Persoonlijke coaching</h3>
+        <p style="font-size:clamp(16px, 1.2vw, 18px); line-height:1.6; color:#1B3560; margin:0 0 18px 0; opacity:0.75;">60 minuten</p>
+        <div style="font-family:'Cormorant Garamond', serif; font-size:28px; color:#B08A5C;">&euro; 95</div>
+      </div>
+      <div style="border-top:2px solid #1B3560; padding-top:26px;">
+        <h3 style="font-family:'Cormorant Garamond', serif; font-size:26px; font-weight:500; margin:0 0 10px 0; color:#1B3560;">Relatiegesprek</h3>
+        <p style="font-size:clamp(16px, 1.2vw, 18px); line-height:1.6; color:#1B3560; margin:0 0 18px 0; opacity:0.75;">90 minuten, samen</p>
+        <div style="font-family:'Cormorant Garamond', serif; font-size:28px; color:#B08A5C;">&euro; 135</div>
+      </div>
+    </div>
+    <div style="max-width:700px; margin:clamp(40px,8vw,72px) auto 0 auto; background:#F1E1D2; padding:clamp(24px,5vw,40px); border-radius:2px;">
+      <h3 style="font-family:'Cormorant Garamond', serif; font-size:24px; font-weight:500; margin:0 0 14px 0; color:#1B3560;">Wordt het vergoed?</h3>
+      <p style="font-size:clamp(17px, 1.4vw, 21px); line-height:1.7; color:#1B3560; margin:0 0 14px 0;">Vaak wel, geheel of gedeeltelijk. Veel werkgevers hebben een opleidings- of vitaliteitsbudget waaruit coaching betaald kan worden, en voor ondernemers zijn de kosten in de regel zakelijk aftrekbaar.</p>
+      <p style="font-size:clamp(17px, 1.4vw, 21px); line-height:1.7; color:#1B3560; margin:0;">Weet je niet zeker hoe dat bij jou zit? Vraag het gerust in het kennismakingsgesprek &mdash; ik denk graag mee en lever de factuur aan zoals jouw werkgever hem nodig heeft.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="background:#1B3560; padding:clamp(76px,11vw,132px) 6vw; color:#F7F1E8;">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap:clamp(48px,7vw,64px); align-items:start;">
+      <div>
+        <div style="font-size:14px; letter-spacing:3px; color:#D8B78E; margin-bottom:14px;">CONTACT</div>
+        <h2 style="font-family:'Cormorant Garamond', serif; font-size:clamp(32px,4vw,44px); font-weight:500; margin:0 0 22px 0;">Neem gerust contact op</h2>
+        <p style="font-size:19px; line-height:1.7; margin:0; max-width:440px; opacity:0.9;">Heb je vragen of wil je een afspraak maken? Ik reageer graag persoonlijk, zonder verplichtingen.</p>
+      </div>
+
+      <!-- ┌─────────────────────────────────────────────────────────────────┐
+           │ HIER JE ACCESS KEY INVULLEN                                     │
+           │ 1. Ga naar web3forms.com, vul roelofsen.jan@gmail.com in        │
+           │ 2. Je krijgt per mail een access key                            │
+           │ 3. Plak die hieronder in plaats van PLAK-HIER-JE-ACCESS-KEY     │
+           │ Zolang dat niet is gebeurd, valt het formulier terug op de      │
+           │ mailclient van de bezoeker — het is dus nooit stuk.             │
+           └─────────────────────────────────────────────────────────────────┘ -->
+      <form id="contactformulier" style="display:flex; flex-direction:column; gap:24px;">
+        <input type="hidden" name="access_key" value="PLAK-HIER-JE-ACCESS-KEY">
+        <input type="hidden" name="subject" value="Nieuw bericht via praktijk-bovenjan.nl">
+        <input type="hidden" name="from_name" value="Praktijk Boven Jan">
+        <!-- spamval: mensen zien dit veld niet, bots vullen het wel in -->
+        <input type="checkbox" name="botcheck" class="visueel-verborgen" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <label class="visueel-verborgen" for="veld-naam">Naam</label>
+          <input id="veld-naam" name="naam" type="text" required autocomplete="name" placeholder="Naam" style="flex:1 1 200px; min-width:0; background:transparent; border:none; border-bottom:1px solid rgba(241,225,210,0.4); color:#F7F1E8; font-size:17px; padding:10px 0;">
+          <label class="visueel-verborgen" for="veld-email">E-mail</label>
+          <input id="veld-email" name="email" type="email" required autocomplete="email" placeholder="E-mail" style="flex:1 1 200px; min-width:0; background:transparent; border:none; border-bottom:1px solid rgba(241,225,210,0.4); color:#F7F1E8; font-size:17px; padding:10px 0;">
+        </div>
+        <label class="visueel-verborgen" for="veld-bericht">Je bericht</label>
+        <textarea id="veld-bericht" name="bericht" required placeholder="Je bericht" rows="4" style="background:transparent; border:none; border-bottom:1px solid rgba(241,225,210,0.4); color:#F7F1E8; font-size:17px; padding:10px 0; resize:vertical;"></textarea>
+        <button type="submit" style="background:#D8B78E; color:#1B3560; border:none; padding:14px 32px; font-size:17px; border-radius:2px; align-self:flex-start;">Verstuur</button>
+        <p id="form-status" role="status" aria-live="polite"></p>
+        <div style="display:flex; flex-direction:column; gap:6px; margin-top:14px; padding-top:22px; border-top:1px solid rgba(241,225,210,0.2); font-size:17px;">
+          <a href="tel:+31622337928">06 22 33 79 28</a>
+          <a href="mailto:roelofsen.jan@gmail.com">roelofsen.jan@gmail.com</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="background:#1B3560; padding:26px 6vw; border-top:1px solid rgba(241,225,210,0.15); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; color:#F1E1D2; font-size:14px; letter-spacing:1px;">
+    <div>PRAKTIJK BOVEN JAN</div>
+    <div style="opacity:0.6;">&copy; 2026</div>
+  </footer>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Praktijk Boven Jan",
+  "description": "Relatiecoaching en persoonlijke coaching door Jan Roelofsen, coach en EFT-counselor.",
+  "url": "https://praktijk-bovenjan.nl/",
+  "image": "https://praktijk-bovenjan.nl/foto-jan.jpg",
+  "telephone": "+31622337928",
+  "email": "roelofsen.jan@gmail.com",
+  "areaServed": "NL",
+  "founder": { "@type": "Person", "name": "Jan Roelofsen", "jobTitle": "Coach en EFT-counselor" }
+}
+</script>
+
+<script>
+  /* Start het openingsbeeld zodra de letters geladen zijn — anders zie je de
+     tekst tijdens het opkomen nog verspringen naar het echte lettertype.
+     Duurt dat te lang, dan beginnen we sowieso na 700 ms. */
+  (function () {
+    var h = document.documentElement;
+    if (!h.classList.contains('js-intro')) return;
+
+    function start() { h.classList.add('js-intro-klaar'); }
+
+    var wachten = [new Promise(function (r) { setTimeout(r, 700); })];
+    if (document.fonts && document.fonts.ready) wachten.push(document.fonts.ready);
+
+    if (window.Promise && Promise.race) {
+      Promise.race(wachten).then(start);
+    } else {
+      setTimeout(start, 300);
+    }
+  })();
+
+  /* Contactformulier.
+     Met een ingevulde access key gaat het bericht via Web3Forms naar
+     roelofsen.jan@gmail.com, zonder dat de bezoeker de pagina verlaat.
+     Is de key nog niet ingevuld, dan opent de mailclient — zo is het
+     formulier nooit een dood knopje. */
+  (function () {
+    var form = document.getElementById('contactformulier');
+    if (!form) return;
+
+    var status = document.getElementById('form-status');
+    var knop = form.querySelector('button[type="submit"]');
+    var sleutelVeld = form.querySelector('input[name="access_key"]');
+    var NOG_NIET_INGEVULD = 'PLAK-HIER-JE-ACCESS-KEY';
+    var MAIL = 'roelofsen.jan@gmail.com';
+
+    function melding(tekst, isFout) {
+      status.textContent = tekst;
+      status.style.color = isFout ? '#F1E1D2' : '#D8B78E';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var sleutel = sleutelVeld ? sleutelVeld.value.trim() : '';
+
+      if (!sleutel || sleutel === NOG_NIET_INGEVULD) {
+        var body = 'Naam: ' + form.naam.value + '\nE-mail: ' + form.email.value +
+                   '\n\n' + form.bericht.value;
+        window.location.href = 'mailto:' + MAIL
+          + '?subject=' + encodeURIComponent('Bericht via de website \u2014 ' + form.naam.value)
+          + '&body=' + encodeURIComponent(body);
+        melding('Je mailprogramma opent met je bericht erin. Lukt dat niet? Mail dan direct naar ' + MAIL + '.');
+        return;
+      }
+
+      var oudeTekst = knop.textContent;
+      knop.disabled = true;
+      knop.style.opacity = '0.55';
+      knop.textContent = 'Versturen\u2026';
+      melding('');
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!data.success) throw new Error(data.message || 'mislukt');
+          form.reset();
+          melding('Dank je wel \u2014 je bericht is verstuurd. Ik neem zo snel mogelijk contact met je op.');
+        })
+        .catch(function () {
+          melding('Het versturen lukte helaas niet. Mail gerust rechtstreeks naar ' + MAIL +
+                  ' of bel 06 22 33 79 28.', true);
+        })
+        .then(function () {
+          knop.disabled = false;
+          knop.style.opacity = '';
+          knop.textContent = oudeTekst;
+        });
+    });
+  })();
+
+  /* Blokken komen in beeld op het moment dat je er naartoe scrollt.
+     Geen tijdslot: een blok verschijnt pas als het daadwerkelijk in beeld komt.
+     Zonder JS, zonder IntersectionObserver of met "beperk beweging" staat
+     alles gewoon meteen zichtbaar. */
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var blokken = [].slice.call(document.querySelectorAll([
+      '#over > div',
+      '#werkwijze > div:last-child > div',
+      '#diensten > div:last-child > div',
+      '#houdmevast [data-reveal]',
+      '#tarieven > div',
+      '#contact > div > *'
+    ].join(', ')));
+    if (!blokken.length) return;
+
+    function toon(el) {
+      var i = [].indexOf.call(el.parentElement.children, el);
+      el.style.transitionDelay = Math.min(i, 4) * 90 + 'ms';
+      el.classList.add('instap-actief');
+    }
+
+    try {
+      blokken.forEach(function (el) { el.classList.add('instap'); });
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          toon(e.target);
+          io.unobserve(e.target);
+        });
+      }, {
+        threshold: 0,
+        /* pas tonen als de bovenkant een stuk voorbij de onderrand is,
+           zodat het meeloopt met het scrollen in plaats van al klaar te staan */
+        rootMargin: '0px 0px -12% 0px'
+      });
+
+      blokken.forEach(function (el) { io.observe(el); });
+    } catch (e) {
+      blokken.forEach(function (el) { el.classList.add('instap-actief'); });
+    }
+  })();
+</script>
+
+</body>
+</html>
