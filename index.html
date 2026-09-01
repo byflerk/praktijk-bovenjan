@@ -367,16 +367,9 @@
         <p style="font-size:19px; line-height:1.7; margin:0; max-width:440px; opacity:0.9;">Heb je vragen of wil je een afspraak maken? Ik reageer graag persoonlijk, zonder verplichtingen.</p>
       </div>
 
-      <!-- ┌─────────────────────────────────────────────────────────────────┐
-           │ HIER JE ACCESS KEY INVULLEN                                     │
-           │ 1. Ga naar web3forms.com, vul roelofsen.jan@gmail.com in        │
-           │ 2. Je krijgt per mail een access key                            │
-           │ 3. Plak die hieronder in plaats van PLAK-HIER-JE-ACCESS-KEY     │
-           │ Zolang dat niet is gebeurd, valt het formulier terug op de      │
-           │ mailclient van de bezoeker — het is dus nooit stuk.             │
-           └─────────────────────────────────────────────────────────────────┘ -->
+      <!-- Web3Forms access key ingesteld — formulier verstuurt nu rechtstreeks naar roelofsen.jan@gmail.com -->
       <form id="contactformulier" style="display:flex; flex-direction:column; gap:24px;">
-        <input type="hidden" name="access_key" value="PLAK-HIER-JE-ACCESS-KEY">
+        <input type="hidden" name="access_key" value="da61b9f2-b978-48ba-9f7d-3ce4bb71ccae">
         <input type="hidden" name="subject" value="Nieuw bericht via praktijk-bovenjan.nl">
         <input type="hidden" name="from_name" value="Praktijk Boven Jan">
         <!-- spamval: mensen zien dit veld niet, bots vullen het wel in -->
@@ -461,7 +454,7 @@
     var status = document.getElementById('form-status');
     var knop = form.querySelector('button[type="submit"]');
     var sleutelVeld = form.querySelector('input[name="access_key"]');
-    var NOG_NIET_INGEVULD = 'PLAK-HIER-JE-ACCESS-KEY';
+    var NOG_NIET_INGEVULD = 'PLAK-HIER-JE-ACCESS-KEY'; // fallback-marker, blijft ongebruikt zolang de key hierboven is ingevuld
     var MAIL = 'roelofsen.jan@gmail.com';
 
     function melding(tekst, isFout) {
