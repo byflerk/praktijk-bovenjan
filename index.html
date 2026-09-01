@@ -106,7 +106,7 @@
          dat is hoe <details> werkt), zodat de pagina vooral over de
          1-op-1 coaching gaat. JS voegt alleen een vloeiende hoogte-animatie
          toe; de open/dicht-status zelf blijft native <details> gedrag. --- */
-  #houdmevast-uitklap { background:#1B3560; }
+  #houdmevast-uitklap { background:#1B3560; padding: 0 6vw clamp(64px,10vw,96px) 6vw; }
   #houdmevast-uitklap > summary {
     list-style: none;
     cursor: pointer;
@@ -114,16 +114,20 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    width: fit-content;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 18px 26px;
+    padding: 16px 30px;
+    background: #16294A;
+    border: 1px solid rgba(216,183,142,0.25);
+    border-radius: 2px;
     color: #D8B78E;
     font-size: 15px;
     letter-spacing: 0.5px;
     text-align: center;
-    border-top: 1px solid rgba(216,183,142,0.25);
   }
   #houdmevast-uitklap > summary::-webkit-details-marker { display: none; }
-  #houdmevast-uitklap > summary:hover { opacity: 0.8; }
+  #houdmevast-uitklap > summary:hover { opacity: 1; background-color: #1c3565; }
   #houdmevast-uitklap > summary:focus-visible {
     outline: 2px solid #D8B78E; outline-offset: 3px; border-radius: 2px;
   }
