@@ -99,6 +99,39 @@
   #form-status { font-size:16px; line-height: 1.6; color: #D8B78E; }
   #form-status:empty { display: none; }
 
+  /* --- Uitklapper naar de groepscursus: standaard dicht (ook zonder JS —
+         dat is hoe <details> werkt), zodat de pagina vooral over de
+         1-op-1 coaching gaat. JS voegt alleen een vloeiende hoogte-animatie
+         toe; de open/dicht-status zelf blijft native <details> gedrag. --- */
+  #houdmevast-uitklap { background:#1B3560; }
+  #houdmevast-uitklap > summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto;
+    padding: 18px 26px;
+    color: #D8B78E;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-align: center;
+    border-top: 1px solid rgba(216,183,142,0.25);
+  }
+  #houdmevast-uitklap > summary::-webkit-details-marker { display: none; }
+  #houdmevast-uitklap > summary:hover { opacity: 0.8; }
+  #houdmevast-uitklap > summary:focus-visible {
+    outline: 2px solid #D8B78E; outline-offset: 3px; border-radius: 2px;
+  }
+  .uitklap-pijl {
+    display: inline-block;
+    font-size: 11px;
+    transition: transform .3s ease;
+  }
+  #houdmevast-uitklap[open] .uitklap-pijl { transform: rotate(180deg); }
+  #houdmevast-uitklap > .uitklap-paneel { overflow: hidden; }
+
   /* --- Mobiel: de header past niet vloeiend, dus hier één bewuste breakpoint.
          Rij 1 = logo + knop, rij 2 = menu over de volle breedte. --- */
   @media (max-width: 620px) {
@@ -139,6 +172,8 @@
 
   @media print {
     .instap, .intro { opacity: 1 !important; transform: none !important; }
+    #houdmevast-uitklap { display: block !important; }
+    #houdmevast-uitklap > .uitklap-paneel { display: block !important; max-height: none !important; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -256,7 +291,7 @@
   </section>
 
   <!-- DIENSTEN -->
-  <section id="diensten" style="padding: clamp(72px,11vw,124px) 6vw; background:#1B3560;">
+  <section id="diensten" style="padding: clamp(72px,11vw,124px) 6vw clamp(56px,9vw,88px) 6vw; background:#1B3560;">
     <div style="text-align:center; margin-bottom:clamp(40px,8vw,64px);">
       <div style="font-size:14px; letter-spacing:3px; color:#D8B78E; margin-bottom:14px;">DIENSTEN</div>
       <h2 style="font-family:'Cormorant Garamond', serif; font-size:clamp(30px,4vw,42px); font-weight:500; margin:0; color:#F7F1E8;">Waarmee ik je kan helpen</h2>
@@ -288,44 +323,57 @@
   <!-- ═══════════════════════════════════════════════════════════════════════
        HOUD ME VAST — losstaand blok, bewust makkelijk te verwijderen.
        Wil Jan dit er (nog) niet in? Knip alles weg tussen deze comment en
-       "EINDE HOUD ME VAST" verderop. Er verandert verder niets aan de pagina:
-       er staat geen menu-link naar dit blok en niets anders verwijst ernaar.
+       "EINDE HOUD ME VAST" verderop (inclusief de <details>-tags eromheen).
+       Er verandert verder niets aan de pagina: er staat geen menu-link naar
+       dit blok en niets anders verwijst ernaar.
+
+       Staat standaard dichtgeklapt onder de twee diensten-kaarten; bezoekers
+       klikken zelf open. Dat is bewust — de site gaat vooral over de
+       1-op-1 coaching, de groepscursus is een extra.
 
        LET OP — deze gegevens komen van onderonsveenendaal.nl en verlopen:
        de startdatum en de prijzen moeten per groep bijgewerkt worden.
        ═══════════════════════════════════════════════════════════════════════ -->
-  <section id="houdmevast" style="padding: clamp(72px,11vw,124px) 6vw; background:#F1E1D2;">
-    <div style="max-width:760px; margin:0 auto; text-align:center;">
-      <div data-reveal style="font-size:14px; letter-spacing:3px; color:#B08A5C; margin-bottom:14px;">OOK IN GROEPSVERBAND</div>
-      <h2 data-reveal style="font-family:'Cormorant Garamond', serif; font-size:clamp(30px,4vw,42px); font-weight:500; margin:0 0 8px 0; color:#1B3560;">Houd me Vast</h2>
-      <p data-reveal style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:clamp(19px,2.4vw,23px); line-height:1.4; color:#B08A5C; margin:0 0 28px 0;">d&eacute; APK voor je relatie</p>
-      <p data-reveal style="font-size:clamp(17px, 1.65vw, 22px); line-height:1.75; color:#1B3560; margin:0 auto; max-width:600px;">Naast de gesprekken in mijn eigen praktijk geef ik samen met Jannie de Houd me Vast-training: acht avonden met een aantal andere stellen, waarin je stap voor stap werkt aan meer verbinding. Een compacte versie van EFT-relatietherapie &mdash; bedoeld voor stellen bij wie het niet crisis is, maar die er samen wel meer uit willen halen.</p>
-    </div>
+  <details id="houdmevast-uitklap">
+    <summary>
+      <span>Houd me Vast &mdash; groepscursus voor stellen</span>
+      <span class="uitklap-pijl" aria-hidden="true">&#9662;</span>
+    </summary>
+    <div class="uitklap-paneel">
+      <section id="houdmevast" style="padding: clamp(56px,9vw,88px) 6vw clamp(72px,11vw,124px) 6vw; background:#F1E1D2;">
+        <div style="max-width:760px; margin:0 auto; text-align:center;">
+          <div data-reveal style="font-size:14px; letter-spacing:3px; color:#B08A5C; margin-bottom:14px;">OOK IN GROEPSVERBAND</div>
+          <h2 data-reveal style="font-family:'Cormorant Garamond', serif; font-size:clamp(30px,4vw,42px); font-weight:500; margin:0 0 8px 0; color:#1B3560;">Houd me Vast</h2>
+          <p data-reveal style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:clamp(19px,2.4vw,23px); line-height:1.4; color:#B08A5C; margin:0 0 28px 0;">d&eacute; APK voor je relatie</p>
+          <p data-reveal style="font-size:clamp(17px, 1.65vw, 22px); line-height:1.75; color:#1B3560; margin:0 auto; max-width:600px;">Naast de gesprekken in mijn eigen praktijk geef ik samen met Jannie de Houd me Vast-training: acht avonden met een aantal andere stellen, waarin je stap voor stap werkt aan meer verbinding. Een compacte versie van EFT-relatietherapie &mdash; bedoeld voor stellen bij wie het niet crisis is, maar die er samen wel meer uit willen halen.</p>
+        </div>
 
-    <div data-reveal style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(150px,100%), 1fr)); gap:clamp(22px,4vw,34px); max-width:900px; margin:clamp(38px,7vw,54px) auto 0 auto;">
-      <div style="border-top:1px solid #B08A5C; padding-top:18px;">
-        <div style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 2.1vw, 30px); color:#1B3560; margin-bottom:4px;">8 avonden</div>
-        <div style="font-size:clamp(15px, 1.2vw, 18px); line-height:1.5; color:#1B3560; opacity:0.7;">samen met andere stellen</div>
-      </div>
-      <div style="border-top:1px solid #B08A5C; padding-top:18px;">
-        <div style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 2.1vw, 30px); color:#1B3560; margin-bottom:4px;">&euro; 175</div>
-        <div style="font-size:clamp(15px, 1.2vw, 18px); line-height:1.5; color:#1B3560; opacity:0.7;">per stel &middot; &euro; 150 m&eacute;t boek</div>
-      </div>
-      <div style="border-top:1px solid #B08A5C; padding-top:18px;">
-        <div style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 2.1vw, 30px); color:#1B3560; margin-bottom:4px;">Veenendaal</div>
-        <div style="font-size:clamp(15px, 1.2vw, 18px); line-height:1.5; color:#1B3560; opacity:0.7;">Ontmoetingshuis Onder Ons</div>
-      </div>
-      <div style="border-top:1px solid #B08A5C; padding-top:18px;">
-        <div style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 2.1vw, 30px); color:#1B3560; margin-bottom:4px;">29 sept 2026</div>
-        <div style="font-size:clamp(15px, 1.2vw, 18px); line-height:1.5; color:#1B3560; opacity:0.7;">start volgende groep</div>
-      </div>
-    </div>
+        <div data-reveal style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(150px,100%), 1fr)); gap:clamp(22px,4vw,34px); max-width:900px; margin:clamp(38px,7vw,54px) auto 0 auto;">
+          <div style="border-top:1px solid #B08A5C; padding-top:18px;">
+            <div style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 2.1vw, 30px); color:#1B3560; margin-bottom:4px;">8 avonden</div>
+            <div style="font-size:clamp(15px, 1.2vw, 18px); line-height:1.5; color:#1B3560; opacity:0.7;">samen met andere stellen</div>
+          </div>
+          <div style="border-top:1px solid #B08A5C; padding-top:18px;">
+            <div style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 2.1vw, 30px); color:#1B3560; margin-bottom:4px;">&euro; 175</div>
+            <div style="font-size:clamp(15px, 1.2vw, 18px); line-height:1.5; color:#1B3560; opacity:0.7;">per stel &middot; &euro; 150 m&eacute;t boek</div>
+          </div>
+          <div style="border-top:1px solid #B08A5C; padding-top:18px;">
+            <div style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 2.1vw, 30px); color:#1B3560; margin-bottom:4px;">Veenendaal</div>
+            <div style="font-size:clamp(15px, 1.2vw, 18px); line-height:1.5; color:#1B3560; opacity:0.7;">Ontmoetingshuis Onder Ons</div>
+          </div>
+          <div style="border-top:1px solid #B08A5C; padding-top:18px;">
+            <div style="font-family:'Cormorant Garamond', serif; font-size:clamp(24px, 2.1vw, 30px); color:#1B3560; margin-bottom:4px;">29 sept 2026</div>
+            <div style="font-size:clamp(15px, 1.2vw, 18px); line-height:1.5; color:#1B3560; opacity:0.7;">start volgende groep</div>
+          </div>
+        </div>
 
-    <p data-reveal style="max-width:600px; margin:clamp(30px,5vw,40px) auto 0 auto; text-align:center; font-size:clamp(17px, 1.35vw, 20px); line-height:1.75; color:#1B3560;">
-      De training wordt georganiseerd door Onder Ons en is dankzij subsidie van de gemeente Veenendaal laag geprijsd. Aanmelden gaat via hen, en begint altijd met een kennismakingsgesprek.<br>
-      <a href="https://onderonsveenendaal.nl/houd-me-vast-de-apk-voor-je-relatie/" target="_blank" rel="noopener" style="display:inline-block; margin-top:16px; color:#1B3560; text-decoration:underline; text-decoration-color:#B08A5C; text-decoration-thickness:1px; text-underline-offset:5px;">Meer informatie en aanmelden bij Onder&nbsp;Ons&nbsp;&rarr;</a>
-    </p>
-  </section>
+        <p data-reveal style="max-width:600px; margin:clamp(30px,5vw,40px) auto 0 auto; text-align:center; font-size:clamp(17px, 1.35vw, 20px); line-height:1.75; color:#1B3560;">
+          De training wordt georganiseerd door Onder Ons en is dankzij subsidie van de gemeente Veenendaal laag geprijsd. Aanmelden gaat via hen, en begint altijd met een kennismakingsgesprek.<br>
+          <a href="https://onderonsveenendaal.nl/houd-me-vast-de-apk-voor-je-relatie/" target="_blank" rel="noopener" style="display:inline-block; margin-top:16px; color:#1B3560; text-decoration:underline; text-decoration-color:#B08A5C; text-decoration-thickness:1px; text-underline-offset:5px;">Meer informatie en aanmelden bij Onder&nbsp;Ons&nbsp;&rarr;</a>
+        </p>
+      </section>
+    </div>
+  </details>
   <!-- ═══════════════════ EINDE HOUD ME VAST ═══════════════════ -->
 
   <!-- TARIEVEN -->
@@ -471,7 +519,7 @@
         var body = 'Naam: ' + form.naam.value + '\nE-mail: ' + form.email.value +
                    '\n\n' + form.bericht.value;
         window.location.href = 'mailto:' + MAIL
-          + '?subject=' + encodeURIComponent('Bericht via de website \u2014 ' + form.naam.value)
+          + '?subject=' + encodeURIComponent('Bericht via de website — ' + form.naam.value)
           + '&body=' + encodeURIComponent(body);
         melding('Je mailprogramma opent met je bericht erin. Lukt dat niet? Mail dan direct naar ' + MAIL + '.');
         return;
@@ -480,7 +528,7 @@
       var oudeTekst = knop.textContent;
       knop.disabled = true;
       knop.style.opacity = '0.55';
-      knop.textContent = 'Versturen\u2026';
+      knop.textContent = 'Versturen…';
       melding('');
 
       fetch('https://api.web3forms.com/submit', {
@@ -492,7 +540,7 @@
         .then(function (data) {
           if (!data.success) throw new Error(data.message || 'mislukt');
           form.reset();
-          melding('Dank je wel \u2014 je bericht is verstuurd. Ik neem zo snel mogelijk contact met je op.');
+          melding('Dank je wel — je bericht is verstuurd. Ik neem zo snel mogelijk contact met je op.');
         })
         .catch(function () {
           melding('Het versturen lukte helaas niet. Mail gerust rechtstreeks naar ' + MAIL +
@@ -550,6 +598,63 @@
     } catch (e) {
       blokken.forEach(function (el) { el.classList.add('instap-actief'); });
     }
+  })();
+
+  /* Groepscursus-uitklapper.
+     <details>/<summary> doet het toggelen zelf, ook zonder JS — dit voegt
+     alleen een vloeiende hoogte-animatie toe in plaats van de harde,
+     ongeanimeerde sprong die de browser standaard geeft. Bij "beperk
+     beweging" of zonder JS blijft het gewoon het kale, direct werkende
+     <details>-gedrag. */
+  (function () {
+    var details = document.getElementById('houdmevast-uitklap');
+    if (!details) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var paneel = details.querySelector('.uitklap-paneel');
+    if (!paneel) return;
+
+    var animeert = false;
+
+    paneel.style.transition = 'max-height .45s cubic-bezier(.2,.7,.3,1)';
+    paneel.style.maxHeight = details.open ? paneel.scrollHeight + 'px' : '0px';
+
+    details.addEventListener('click', function (e) {
+      if (e.target.closest('summary') === null) return;
+      e.preventDefault();
+      if (animeert) return;
+
+      if (details.open) {
+        // Dichtklappen: eerst de huidige hoogte vastzetten, dan naar 0 animeren.
+        animeert = true;
+        paneel.style.maxHeight = paneel.scrollHeight + 'px';
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () { paneel.style.maxHeight = '0px'; });
+        });
+        paneel.addEventListener('transitionend', function afsluiten() {
+          paneel.removeEventListener('transitionend', afsluiten);
+          details.open = false;
+          animeert = false;
+        }, { once: true });
+      } else {
+        details.open = true;
+        animeert = true;
+        // Inhoud is meteen zichtbaar, onafhankelijk van de scroll-reveal hierboven.
+        [].slice.call(paneel.querySelectorAll('[data-reveal]')).forEach(function (el) {
+          el.classList.add('instap-actief');
+        });
+        paneel.style.maxHeight = paneel.scrollHeight + 'px';
+        paneel.addEventListener('transitionend', function openen() {
+          paneel.removeEventListener('transitionend', openen);
+          paneel.style.maxHeight = 'none';
+          animeert = false;
+        }, { once: true });
+      }
+    });
+
+    window.addEventListener('resize', function () {
+      if (details.open) paneel.style.maxHeight = 'none';
+    });
   })();
 </script>
 
