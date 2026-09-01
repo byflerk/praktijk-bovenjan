@@ -367,7 +367,7 @@
         <p style="font-size:19px; line-height:1.7; margin:0; max-width:440px; opacity:0.9;">Heb je vragen of wil je een afspraak maken? Ik reageer graag persoonlijk, zonder verplichtingen.</p>
       </div>
 
-      <!-- Web3Forms access key ingesteld — formulier verstuurt nu rechtstreeks naar roelofsen.jan@gmail.com -->
+      <!-- Web3Forms access key ingesteld — formulier verstuurt nu rechtstreeks naar praktijk.bovenjan@gmail.com -->
       <form id="contactformulier" style="display:flex; flex-direction:column; gap:24px;">
         <input type="hidden" name="access_key" value="da61b9f2-b978-48ba-9f7d-3ce4bb71ccae">
         <input type="hidden" name="subject" value="Nieuw bericht via praktijk-bovenjan.nl">
@@ -386,7 +386,7 @@
         <p id="form-status" role="status" aria-live="polite"></p>
         <div style="display:flex; flex-direction:column; gap:6px; margin-top:14px; padding-top:22px; border-top:1px solid rgba(241,225,210,0.2); font-size:17px;">
           <a href="tel:+31622337928">06 22 33 79 28</a>
-          <a href="mailto:roelofsen.jan@gmail.com">roelofsen.jan@gmail.com</a>
+          <a href="mailto:praktijk.bovenjan@gmail.com">praktijk.bovenjan@gmail.com</a>
         </div>
       </form>
     </div>
@@ -416,7 +416,7 @@
   "url": "https://praktijk-bovenjan.nl/",
   "image": "https://praktijk-bovenjan.nl/foto-jan.jpg",
   "telephone": "+31622337928",
-  "email": "roelofsen.jan@gmail.com",
+  "email": "praktijk.bovenjan@gmail.com",
   "areaServed": "NL",
   "founder": { "@type": "Person", "name": "Jan Roelofsen", "jobTitle": "Coach en EFT-counselor" }
 }
@@ -444,7 +444,7 @@
 
   /* Contactformulier.
      Met een ingevulde access key gaat het bericht via Web3Forms naar
-     roelofsen.jan@gmail.com, zonder dat de bezoeker de pagina verlaat.
+     praktijk.bovenjan@gmail.com, zonder dat de bezoeker de pagina verlaat.
      Is de key nog niet ingevuld, dan opent de mailclient — zo is het
      formulier nooit een dood knopje. */
   (function () {
@@ -455,7 +455,7 @@
     var knop = form.querySelector('button[type="submit"]');
     var sleutelVeld = form.querySelector('input[name="access_key"]');
     var NOG_NIET_INGEVULD = 'PLAK-HIER-JE-ACCESS-KEY'; // fallback-marker, blijft ongebruikt zolang de key hierboven is ingevuld
-    var MAIL = 'roelofsen.jan@gmail.com';
+    var MAIL = 'praktijk.bovenjan@gmail.com';
 
     function melding(tekst, isFout) {
       status.textContent = tekst;
