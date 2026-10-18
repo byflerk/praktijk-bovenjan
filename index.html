@@ -444,6 +444,8 @@
         <div style="display:flex; gap:16px; flex-wrap:wrap;">
           <label class="visueel-verborgen" for="veld-naam">Naam</label>
           <input id="veld-naam" name="naam" type="text" required autocomplete="name" placeholder="Naam" style="flex:1 1 200px; min-width:0; background:transparent; border:none; border-bottom:1px solid rgba(241,225,210,0.4); color:#F7F1E8; font-size:17px; padding:10px 0;">
+          <label class="visueel-verborgen" for="veld-telefoon">Telefoonnummer</label>
+          <input id="veld-telefoon" name="telefoon" type="tel" required autocomplete="tel" placeholder="Telefoonnummer" style="flex:1 1 200px; min-width:0; background:transparent; border:none; border-bottom:1px solid rgba(241,225,210,0.4); color:#F7F1E8; font-size:17px; padding:10px 0;">
           <label class="visueel-verborgen" for="veld-email">E-mail</label>
           <input id="veld-email" name="email" type="email" required autocomplete="email" placeholder="E-mail" style="flex:1 1 200px; min-width:0; background:transparent; border:none; border-bottom:1px solid rgba(241,225,210,0.4); color:#F7F1E8; font-size:17px; padding:10px 0;">
         </div>
@@ -540,8 +542,8 @@
       var sleutel = sleutelVeld ? sleutelVeld.value.trim() : '';
 
       if (!sleutel || sleutel === NOG_NIET_INGEVULD) {
-        var body = 'Naam: ' + form.naam.value + '\nE-mail: ' + form.email.value +
-                   '\n\n' + form.bericht.value;
+        var body = 'Naam: ' + form.naam.value + '\nTelefoon: ' + form.telefoon.value +
+                   '\nE-mail: ' + form.email.value + '\n\n' + form.bericht.value;
         window.location.href = 'mailto:' + MAIL
           + '?subject=' + encodeURIComponent('Bericht via de website — ' + form.naam.value)
           + '&body=' + encodeURIComponent(body);
